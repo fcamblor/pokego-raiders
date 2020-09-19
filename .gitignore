@@ -1,3 +1,7 @@
 *.iml
 .idea
+web-app/dist/
 node_modules/
+web-app/web_modules/
+web-app/storybook/storybook-static/
+web-app/storybook/node_modules/
