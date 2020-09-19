@@ -29,6 +29,9 @@ It provides out of the box :
 - Storybook for your components' stories
 - No build tool complexity involved : everything is in the `package.json`'s `script` section
 
+**Warning** : Unfortunately, if you're on Linux, src/pages/_pages.ts file automatic generation will not work due to `node-watch`
+not handling well recursive watch on linux filesystem.
+
 ## Compat
 
 As date of this writing, it works with most ever green browsers :  

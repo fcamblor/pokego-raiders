@@ -15,6 +15,7 @@
     "@snowpack/app-scripts-lit-element": "^1.8.4",
     "@types/snowpack-env": "2.3.0",
     "concurrently": "5.0.2",
+    "node-watch": "0.6.4",
     "sass": "1.24.3",
     "snowpack": "2.11.1",
     "typescript": "3.9.7"
@@ -37,6 +38,7 @@
     "extends": "@snowpack/app-scripts-lit-element",
     "scripts": {
       "proxy:storybook": "proxy http://localhost:8001 --to /storybook",
+      "run:auto-injected-scripts": "node build/inject-filesystem-auto-imports.js ./src/pages _pages.ts",
       "run:sass-vendors": "sass styles/foundation/foundation.scss dist/styles/vendors.css",
       "run:sass-vendors::watch": "$1 --watch",
       "run:sass-app": "sass styles/app/app.scss dist/styles/app.css",
