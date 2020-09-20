@@ -1,5 +1,5 @@
 
-interface RoutingDefinitions {
+export interface RoutingDefinitions {
     when: string;
     html: string;
 }

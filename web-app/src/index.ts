@@ -1,10 +1,14 @@
-import {ActionButton} from './components/button';
-import {AppRouter} from "./core/AppRouter";
+import './components/_components';
 import './pages/_pages';
+import {APP} from "./core/App";
 
-new AppRouter().setupRouter([
-    { when: '/registration', html: '<registration-page>' },
-    { when: '/button', html: '<action-button>' }
-], '/registration');
 
-console.log("App started !", ActionButton.BLAH);
+APP.start({
+    routes: [
+        {when: '/registration', html: '<registration-page>'},
+        {when: '/button', html: '<action-button>'}
+    ],
+    defaultRoute: '/registration'
+}).then(() => {
+    console.log("App started !");
+});
