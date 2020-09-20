@@ -1,7 +1,11 @@
 import type {RoutingDefinitions} from "./AppRouter";
+import {States} from "./States";
 import {AppRouter} from "./AppRouter";
+import type {LanguageCode} from "../models/I18nMessages";
+
 
 interface StartOpts {
+    defaultLang: LanguageCode;
     routes: RoutingDefinitions[];
     defaultRoute: string;
 }
@@ -16,8 +20,9 @@ export class Application {
     }
 
     public start(opts: StartOpts): Promise<void> {
-        this.router.setupRouter(opts.routes, opts.defaultRoute);
-        return Promise.resolve(null);
+        return States.start({ defaultLang: opts.defaultLang }).then(() => {
+            this.router.setupRouter(opts.routes, opts.defaultRoute);
+        });
     }
 }
 

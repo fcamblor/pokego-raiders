@@ -1,2 +1,2 @@
 import './button';
-import './core/i18n';
+import './core/I18NLabel';
