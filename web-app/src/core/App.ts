@@ -2,6 +2,8 @@ import type {RoutingDefinitions} from "./AppRouter";
 import {States} from "./States";
 import {AppRouter} from "./AppRouter";
 import type {LanguageCode} from "../models/I18nMessages";
+import {Optional} from "../utils/Optional";
+import type {User} from "../models/User";
 
 
 interface StartOpts {
@@ -23,6 +25,10 @@ export class Application {
         return States.start({ defaultLang: opts.defaultLang }).then(() => {
             this.router.setupRouter(opts.routes, opts.defaultRoute);
         });
+    }
+
+    currentUser(): Optional<User> {
+        return Optional.fromNullable(States.currentUser);
     }
 }
 
