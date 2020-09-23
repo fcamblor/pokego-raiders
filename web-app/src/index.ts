@@ -6,8 +6,7 @@ import {APP} from "./core/App";
 APP.start({
     defaultLang: 'fr',
     routes: [
-        {when: '/registration', html: '<registration-page>'},
-        {when: '/button', html: '<action-button>'}
+        {when: '/registration', html: '<registration-page></registration-page>'}
     ],
     defaultRoute: '/registration'
 }).then(() => {
