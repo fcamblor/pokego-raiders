@@ -1,13 +1,20 @@
 
-export interface RoutingDefinitions {
+interface AbstractRouting {
     when: string;
+}
+interface HtmlViewRouting extends AbstractRouting{
     html: string;
 }
+interface RedirectRouting extends AbstractRouting{
+    redirect: () => string;
+}
+
+export type RoutingDefinition = HtmlViewRouting | RedirectRouting;
 
 export class AppRouter {
     private $appPage: HTMLElement|null = null;
 
-    public setupRouter(routingDefs: RoutingDefinitions[], defaultRoute: string) {
+    public setupRouter(routingDefs: RoutingDefinition[], defaultRoute: string) {
         this.$appPage = document.getElementById("app-page");
 
         window.addEventListener("hashchange", () => {
@@ -22,13 +29,17 @@ export class AppRouter {
         }
     }
 
-    private handleHashChanges(routingDefs: RoutingDefinitions[]) {
+    private handleHashChanges(routingDefs: RoutingDefinition[]) {
         const route = location.hash.substr("#".length);
         const routeMatched = routingDefs.some(routingDef => {
             let regexp = new RegExp(`^${routingDef.when}$`);
             let execResult = regexp.exec(route);
             if(execResult) {
-                this.$appPage!.innerHTML = routingDef.html;
+                if(AppRouter.isHtmlViewRouting(routingDef)) {
+                    this.$appPage!.innerHTML = routingDef.html;
+                } else if(AppRouter.isRedirectRouting(routingDef)) {
+                    location.hash = routingDef.redirect();
+                }
                 return true;
             }
             return false;
@@ -37,5 +48,12 @@ export class AppRouter {
         if(!routeMatched) {
             console.warn(`No route matched for route ${route}`);
         }
+    }
+
+    private static isHtmlViewRouting(route: AbstractRouting): route is HtmlViewRouting {
+        return !!(route as HtmlViewRouting).html;
+    }
+    private static isRedirectRouting(route: AbstractRouting): route is RedirectRouting {
+        return !!(route as RedirectRouting).redirect;
     }
 }

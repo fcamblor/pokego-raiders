@@ -6,9 +6,11 @@ import {APP} from "./core/App";
 APP.start({
     defaultLang: 'fr',
     routes: [
-        {when: '/registration', html: '<registration-page></registration-page>'}
+        {when: '/welcome', redirect: () => APP.currentUser().map(() => '/streams').orElse('/registration') },
+        {when: '/registration', html: '<registration-page></registration-page>'},
+        {when: '/communities', html: '<communities-list-page></communities-list-page>'}
     ],
-    defaultRoute: '/registration'
+    defaultRoute: '/welcome'
 }).then(() => {
     console.log("App started !");
 });

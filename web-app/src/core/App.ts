@@ -1,4 +1,4 @@
-import type {RoutingDefinitions} from "./AppRouter";
+import type {RoutingDefinition} from "./AppRouter";
 import {States} from "./States";
 import {AppRouter} from "./AppRouter";
 import type {LanguageCode} from "../models/I18nMessages";
@@ -8,7 +8,7 @@ import type {User} from "../models/User";
 
 interface StartOpts {
     defaultLang: LanguageCode;
-    routes: RoutingDefinitions[];
+    routes: RoutingDefinition[];
     defaultRoute: string;
 }
 
