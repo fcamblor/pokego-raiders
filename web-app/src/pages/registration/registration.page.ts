@@ -18,17 +18,7 @@ export class RegistrationPage extends LitElement {
     ${i18n('registration-page.title')}
     <div class="grid-container fluid">
       <new-user-form></new-user-form>
-      <fieldset class="fieldset">
-        <legend>${i18n('registration-page.existing-user')}</legend>
-    
-        <div class="grid-container grid-x grid-margin-x fluid">
-          <div class="cell">
-            <label>${i18n('registration-page.your-account-token.label')} <em>(ℹ️ ${i18n('registration-page.your-account-token.description')})</em>
-                <textarea rows="3"></textarea>
-            </label>
-          </div>
-        </div>
-      </fieldset>
+      <existing-user-form></existing-user-form>
     </div>
     `;
     }

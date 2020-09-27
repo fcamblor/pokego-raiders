@@ -18,6 +18,7 @@ export const TRANSLATIONS = {
         'new-user': `Nouvel utilisateur`,
         'existing-user': `Utilisateur existant`,
         'register-user': `S'inscrire`,
+        'load-user': `Charger le compte utilisateur`,
         'your-ami-code': {
             'label': `Code AMI`,
             'description': `important pour qu'on puisse vous inviter facilement`,
