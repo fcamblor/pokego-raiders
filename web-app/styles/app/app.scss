@@ -1,6 +1,9 @@
 
-$toto: white;
+$error-color: red;
 
 body {
-  background-color: $toto;
+}
+
+.error-msg {
+  color: $error-color;
 }

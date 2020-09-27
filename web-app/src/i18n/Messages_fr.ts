@@ -17,9 +17,11 @@ export const TRANSLATIONS = {
         'title': `Bienvenue sur la page d'inscription {{who}} !`,
         'new-user': `Nouvel utilisateur`,
         'existing-user': `Utilisateur existant`,
+        'register-user': `S'inscrire`,
         'your-ami-code': {
             'label': `Code AMI`,
-            'description': `important pour qu'on puisse vous inviter facilement`
+            'description': `important pour qu'on puisse vous inviter facilement`,
+            'already-used': `Ce code AMI est déjà référencé : utilisez l'inscription "Utilisateur existant" ci-dessous pour le configurer sur ce navigateur`
         },
         'your-team': {
             'label': `Équipe`,
@@ -33,7 +35,8 @@ export const TRANSLATIONS = {
             'label': `Niveau`
         },
         'your-account-token': {
-            'label': `Clef du compte`
+            'label': `Clef du compte`,
+            'description': `cette information vous a été fournie lors de votre première inscription, ou dans vos préférenes si vous êtes encore connecté sur un autre ordinateur/navigateur`,
         },
     },
     'communities-list': {
