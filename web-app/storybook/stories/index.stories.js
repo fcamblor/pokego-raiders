@@ -1,21 +1,12 @@
 import { html } from 'lit-html';
 
-import '/_dist_/components/button.js';
+import '/_dist_/components/registration/new-user-form.js';
 
 export default {
-    title: 'Demo Component Story Format',
-    component: 'action-button'
+    title: 'New user form',
+    component: 'new-user-form'
 };
 
-export const heading = () =>
-    html`
-    <h1>Hello World</h1>
-    <input type="text" />
+export const form = () => html`
+  <new-user-form></new-user-form>
   `;
-
-export const button = () => html`
-  Hey <action-button name="coucou" />
-  `;
-
-// export const assets = () =>
-//     html` <img src=${new URL('../assets/logo.png', import.meta.url)} title="loaded logo" /> `;
