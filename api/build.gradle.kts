@@ -30,11 +30,21 @@ dependencies {
 	implementation("com.google.guava:guava:29.0-jre")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit")
+		exclude(module = "mockito-core")
+	}
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+	testImplementation("org.testcontainers:postgresql:1.10.6")
+	testImplementation("org.postgresql:postgresql")
 }
 
 tasks.withType<Test> {
-	useJUnitPlatform()
+	useJUnitPlatform();
+	// see https://github.com/testcontainers/testcontainers-java/issues/700#issuecomment-458918523
+	// and https://www.testcontainers.org/features/configuration/#disabling-ryuk
+	environment("TESTCONTAINERS_RYUK_DISABLED", "true")
 }
 
 tasks.withType<KotlinCompile> {
