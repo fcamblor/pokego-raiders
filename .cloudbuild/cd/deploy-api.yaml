@@ -1,0 +1,41 @@
+steps:
+  - id: 'build'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        cd api
+        ./gradlew build
+        cp build/libs/pokeraiders-api-*.jar /workspace/pokeraiders-api.jar
+
+- id: 'pull-cache'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      BUCKET_PATH=gs://$_BUCKET/pokeraiders-api-$(date '+%Y%m%dT%H%M').$_ENV.jar
+      gsutil cp /workspace/pokeraiders-api.jar $BUCKET_PATH
+      cd api/
+      gcloud compute instances create pokeraiders-$_ENV \
+          --image-family debian-10 \
+          --image-project debian-cloud \
+          --machine-type g1-small \
+          --scopes "userinfo-email,cloud-platform" \
+          --metadata-from-file startup-script=instance-startup.sh \
+          --metadata BUCKET=$_BUCKET,RECAPTCHA_SECRET=$_RECAPTCHA_SECRET,DATASOURCE_URL=$_DATASOURCE_URL,PG_USER=$_PG_USER,PG_PASSWORD=$_PG_PASSWORD,BUCKET_PATH=$BUCKET_PATH \
+          --zone $_ZONE \
+          --tags http-server
+
+tags: ['deploy', '$_ENV']
+logsBucket: 'gs://$_BUCKET/logs'
+substitutions:
+  _BUCKET: pokeraiders
+  _ZONE: europe-west1-c
+  # _RECAPTCHA_SECRET: ...
+  # _DATASOURCE_URL: ...
+  # _PG_USER: ...
+  # _PG_PASSWORD: ...
+  # _RECAPTCHA_SECRET: ...
+  # _ENV: prod | stg | ...
